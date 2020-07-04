@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
     ckamaster1.vm.provision :shell, path: "provision.sh"
   end
   
- # Opional masters for HA lab
+  # Optional masters for HA lab
   # The kubernetes master-2
   config.vm.define "ckamaster2" do |ckamaster2|
     ckamaster2.vm.provider "virtualbox" do |vb|
@@ -74,7 +74,22 @@ Vagrant.configure("2") do |config|
     ckaworker1.vm.network "private_network", ip: "192.168.56.104"
     ckaworker1.vm.provision :shell, path: "provision.sh"
   end
- 
+
+  # Second kubernetes worker node (for drain/uncordon/join labs)
+  config.vm.define "ckaworker2" do |ckaworker2|
+    ckaworker2.vm.provider "virtualbox" do |vb|
+      disk = 'ckaworker2.img'
+      vb.memory = 2 * 1024
+      vb.cpus = 1
+      vb.name = "ckaworker2"
+    end
+
+    ckaworker2.vm.box = "ubuntu/xenial64"
+    ckaworker2.vm.hostname = "ckaworker2"
+    ckaworker2.vm.network "private_network", ip: "192.168.56.105"
+    ckaworker2.vm.provision :shell, path: "provision.sh"
+  end
+
    # The external lb node
   config.vm.define "ckalb" do |ckalb|
     ckalb.vm.provider "virtualbox" do |vb|
