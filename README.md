@@ -6,7 +6,7 @@ Load-balancer node has been prepared with:
   - simple haproxy configuration to test external access for k8s services exposed with nodePort
   - simple nfs export ```/opt/sfw/``` for testing persistent volumes
 
-### Simpe lab diagram 
+### Simple lab diagram 
 <img src="https://raw.githubusercontent.com/michalgutowski/cka-lab/master/lab-diagram.svg?sanitize=true">
 
 ### Cluster networking:  

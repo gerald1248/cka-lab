@@ -64,14 +64,14 @@ mkdir -p /home/student/.kube
 # set up kubeconfig
 sudo cp -i /etc/kubernetes/admin.conf /home/student/.kube/config
 sudo chown student /home/student/.kube/config
-EOF
 
-cat >/home/student/apply-flannel.sh <<EOF
+# apply flannel; without it, the nodes don't enter ready status
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 EOF
 
 cat >/home/student/apply-calico.sh <<EOF
-kubectl apply -f rbac-kdd.yaml calico.yaml
+kubectl apply -f rbac-calico.yaml
+kubectl apply -f calico.yaml
 EOF
   ;;
 ckaworker*)
