@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
     ckaworker1.vm.provider "virtualbox" do |vb|
       disk = 'ckaworker1.img'
       vb.memory = 2 * 1024
-      vb.cpus = 1
+      vb.cpus = 2
       vb.name = "ckaworker1"
     end
 
@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
     ckaworker2.vm.provider "virtualbox" do |vb|
       disk = 'ckaworker2.img'
       vb.memory = 2 * 1024
-      vb.cpus = 1
+      vb.cpus = 2
       vb.name = "ckaworker2"
     end
 

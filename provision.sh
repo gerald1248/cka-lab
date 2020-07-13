@@ -44,7 +44,7 @@ EOF
 
 # copy initial kubadm and calico config yaml files
 cp /vagrant/kubernetes/kubeadm-config.yaml /home/student/kubeadm-config.yaml
-cp /vagrant/kubernetes/calico.yaml /vagrant/kubernetes/rbac-kdd.yaml /home/student/
+cp /vagrant/kubernetes/calico.yaml /vagrant/kubernetes/rbac-calico.yaml /home/student/
 
 # update, upgrade and instal nfs client tools
 apt-get update && apt-get upgrade -y && apt-get install -y nfs-common
