@@ -17,6 +17,7 @@ Internal IP addresses (you can copy the following to your ```/etc/hosts``` file)
 192.168.56.102 ckamaster2  
 192.168.56.103 ckamaster3  
 192.168.56.104 ckaworker1  
+192.168.56.105 ckaworker2  
 ```
 Pod CIDR: 
 ```

@@ -11,6 +11,8 @@ Vagrant.configure("2") do |config|
 # Provider-specific configuration -- VirtualBox
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--groups", "/" + "CKA"]
+    vb.customize ['modifyvm', :id, "--uartmode1", "disconnected"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
   # The kubernetes master

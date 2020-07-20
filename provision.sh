@@ -11,7 +11,7 @@ cat <<-EOF >>/etc/hosts
 EOF
 
 # allow root ssh logins
-printf '\nPermitRootLogin yes\n' >> /etc/ssh/sshd_config
+printf '\nPermitRootLogin yes\n' >>/etc/ssh/sshd_config
 printf '\nStrictHostKeyChecking no\n' >>/etc/ssh/ssh_config
 systemctl restart sshd
 
@@ -44,7 +44,8 @@ EOF
 
 # copy initial kubadm and calico config yaml files
 cp /vagrant/kubernetes/kubeadm-config.yaml /home/student/kubeadm-config.yaml
-cp /vagrant/kubernetes/calico.yaml /vagrant/kubernetes/rbac-calico.yaml /home/student/
+cp /vagrant/kubernetes/calico.yaml /home/student/
+cp /vagrant/kubernetes/rbac-calico.yaml /home/student/
 
 # update, upgrade and instal nfs client tools
 apt-get update && apt-get upgrade -y && apt-get install -y nfs-common
@@ -65,13 +66,20 @@ mkdir -p /home/student/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/student/.kube/config
 sudo chown student /home/student/.kube/config
 
-# apply flannel; without it, the nodes don't enter ready status
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-EOF
-
-cat >/home/student/apply-calico.sh <<EOF
+# calico
+cat >/home/student/apply-calico.sh <<EOL
 kubectl apply -f rbac-calico.yaml
 kubectl apply -f calico.yaml
+EOL
+
+# flannel
+cat >/home/student/apply-flannel.sh <<EOL
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+EOL
+
+# apply calico by default
+. /home/student/apply-calico.sh
+
 EOF
   ;;
 ckaworker*)
